@@ -1,5 +1,8 @@
-const mongoose = require("mongoose");
-const express = require("express");
+import mongoose from "mongoose";
+import express from "express";
+import mongoPasswordo from "./mongooseKey.js";
+import Recipe from "./models/Recipe.js";
+
 const app = express();
 
 const port = 9000;
@@ -15,14 +18,12 @@ app.use(function (req, res, next) {
   next();
 });
 
-const Recipe = require("./models/Recipe.js");
-
 populateDBs();
 
 app.use(express.json());
 
 mongoose.connect(
-  "mongodb+srv://Pumak:9MRarbyueOuQbWIO@cluster0.mbfbdy3.mongodb.net/"
+  `mongodb+srv://bazinga1:${mongoPasswordo}@clusterki.dtqw758.mongodb.net/`
 );
 
 app.listen(port, ip, () => console.log(`http://${ip}:${port}`));
@@ -48,7 +49,7 @@ async function fetchMeals() {
 function createMeals(meals) {
   meals.forEach((meal) => {
     const mealsArray = Object.entries(meal);
-    const ingredients = [];
+    const ingredients = []; 
     mealsArray.forEach((mi) => {
       if (mi[0].includes("Ingredient") && mi[1] !== "" && mi[1] !== null) {
         let number = mi[0].slice(13);
@@ -79,3 +80,4 @@ function createMeals(meals) {
 async function populateDBs() {
   fetchMeals();
 }
+
