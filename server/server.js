@@ -23,7 +23,7 @@ populateDBs();
 app.use(express.json());
 
 mongoose.connect(
-  `mongodb+srv://bazinga1:${mongoPasswordo}@clusterki.dtqw758.mongodb.net/`
+  `${mongoPasswordo}`
 );
 
 app.listen(port, ip, () => console.log(`http://${ip}:${port}`));
