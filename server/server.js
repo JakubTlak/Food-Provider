@@ -20,10 +20,19 @@ app.use(function (req, res, next) {
   next();
 });
 
-mongoose.connect(
-  `${mongoPasswordo}`
-);
+mongoose.connect(`${mongoPasswordo}`);
 
+app.get("/api/ingredients", (req, res) => {
+  Ingredient.find({})
+    .then((data) => res.json(data))
+    .catch((error) => console.error(error));
+});
+
+app.get("/api/meals", (req, res) => {
+  Recipe.find({})
+    .then((data) => res.send(data))
+    .catch((error) => console.error(error));
+});
 
 app.listen(port, ip, () => console.log(`http://${ip}:${port}`));
 
@@ -80,25 +89,17 @@ async function populateDBs() {
   fetchMeals();
 }
 
-
-function fetchIngredients (){
-fetch('https://www.themealdb.com/api/json/v1/1/list.php?i=list')
-.then(response=> response.json())
-.then(data =>{
-  data.meals.forEach(ingredient=>{
-    const ingredient1 = new Ingredient({
-      ingredientId: ingredient.idIngredient,
-      ingredientName: ingredient.strIngredient
+function fetchIngredients() {
+  fetch("https://www.themealdb.com/api/json/v1/1/list.php?i=list")
+    .then((response) => response.json())
+    .then((data) => {
+      data.meals.forEach((ingredient) => {
+        const ingredient1 = new Ingredient({
+          ingredientId: ingredient.idIngredient,
+          ingredientName: ingredient.strIngredient,
+        });
+        ingredient1.save();
+      });
     })
-    ingredient1.save();
-  })
-})
-.catch(error=>console.error(error));
+    .catch((error) => console.error(error));
 }
-
-
-app.get("/api/ingredients", (req,res)=>{
-  Ingredient.find({})
-  .then(data => res.json(data))
-  .catch(error=>console.error(error))
-})
