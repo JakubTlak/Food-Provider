@@ -1,6 +1,10 @@
-const mongoose = require("mongoose");
-const express = require("express");
+import mongoose from "mongoose";
+import express from "express";
+import Recipe from "./models/Recipe.js";
+import mongoPasswordo from "./mongooseKey.js";
+
 const app = express();
+app.use(express.json());
 
 const port = 9000;
 const ip = "127.0.0.1";
@@ -15,15 +19,11 @@ app.use(function (req, res, next) {
   next();
 });
 
-const Recipe = require("./models/Recipe.js");
+mongoose.connect(
+  `${mongoPasswordo}`
+);
 
 populateDBs();
-
-app.use(express.json());
-
-mongoose.connect(
-  "mongodb+srv://Pumak:9MRarbyueOuQbWIO@cluster0.mbfbdy3.mongodb.net/"
-);
 
 app.listen(port, ip, () => console.log(`http://${ip}:${port}`));
 
