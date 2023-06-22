@@ -1,7 +1,7 @@
 import "./MainPage.css";
 import { useEffect, useState, useRef } from "react";
 
-function MainPage() {
+function MainPage({ ingredientToShow }) {
   const [searchInput, setSearchInput] = useState("");
   const [recipe, setRecipe] = useState([]);
   const [filteredMeals, setFilteredMeals] = useState([]);
@@ -47,6 +47,7 @@ function MainPage() {
     setSearchInput(value);
     setShowOptions(false);
     setShowDetails(true);
+    ingredientToShow(value);
   };
 
   const handleClear = () => {

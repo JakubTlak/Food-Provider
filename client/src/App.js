@@ -6,8 +6,8 @@ import MainPage from "./components/MainPage";
 function App() {
   const [page, setPage] = useState("main");
   const [ingredients, setIngredients] = useState(null);
-
   const [myIngredients, setMyIngredients] = useState([]);
+  const [inngredientToShow, setinngredientToShow] = useState("");
 
   function getIngredients() {
     fetch("http://127.0.0.1:9000/api/ingredients")
@@ -21,7 +21,7 @@ function App() {
   function switchPage(toShow) {
     switch (toShow) {
       case "main":
-        return <MainPage></MainPage>;
+        return <MainPage setinngredientToShow={setinngredientToShow}></MainPage>;
       case "menu":
 
       case "recipeList":
