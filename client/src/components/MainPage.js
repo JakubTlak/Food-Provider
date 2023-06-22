@@ -1,7 +1,8 @@
 import "./MainPage.css";
 import { useEffect, useState, useRef } from "react";
+import RecipeDetails from "./RecipeDetails";
 
-function MainPage({ ingredientToShow }) {
+function MainPage({ recipeToShow, setRecipeToShow, setPage }) {
   const [searchInput, setSearchInput] = useState("");
   const [recipe, setRecipe] = useState([]);
   const [filteredMeals, setFilteredMeals] = useState([]);
@@ -14,10 +15,10 @@ function MainPage({ ingredientToShow }) {
   }, []);
 
   useEffect(() => {
-    filterMeals();
+    filterMeals(recipe, searchInput);
   }, [searchInput, recipe]);
 
-  const fetchRecipes = () => {
+  function fetchRecipes() {
     fetch("http://127.0.0.1:9000/api/meals")
       .then((res) => res.json())
       .then((data) => {
@@ -26,15 +27,15 @@ function MainPage({ ingredientToShow }) {
       .catch((error) => {
         console.error(error);
       });
-  };
+  }
 
-  const filterMeals = () => {
+  function filterMeals(toFilter, filterBy) {
     setFilteredMeals(
-      recipe.filter((meal) => {
-        return meal.strMeal.toLowerCase().includes(searchInput.toLowerCase());
+      toFilter.filter((meal) => {
+        return meal.strMeal.toLowerCase().includes(filterBy.toLowerCase());
       })
     );
-  };
+  }
 
   const handleChange = (e) => {
     const input = e.target.value;
@@ -43,23 +44,27 @@ function MainPage({ ingredientToShow }) {
     setShowDetails(false);
   };
 
-  const handleOptionClick = (value) => {
+  const handleOptionClick = (value, meal) => {
     setSearchInput(value);
     setShowOptions(false);
     setShowDetails(true);
-    ingredientToShow(value);
+    setRecipeToShow(meal);
   };
 
-  const handleClear = () => {
+  function handleClear() {
     setSearchInput("");
     setShowOptions(false);
-  };
+  }
 
-  const handleClickOutside = (event) => {
+  function handleClickOutside(event) {
     if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
       setShowOptions(false);
     }
-  };
+  }
+
+  function handleLogin() {
+    setPage("menu");
+  }
 
   useEffect(() => {
     document.addEventListener("mousedown", handleClickOutside);
@@ -72,7 +77,7 @@ function MainPage({ ingredientToShow }) {
   return (
     <div className="MainPage">
       <div className="loginRegister">
-        <button>login</button>
+        <button onClick={handleLogin}>login</button>
         <button>register</button>
       </div>
       <div className="searchMeals">
@@ -94,14 +99,15 @@ function MainPage({ ingredientToShow }) {
                 <div
                   key={meal._id}
                   className="option"
-                  onClick={() => handleOptionClick(meal.strMeal)}
+                  value={meal.strMeal}
+                  onClick={() => handleOptionClick(meal.strMeal, meal)}
                 >
                   {meal.strMeal}
                 </div>
               ))}
             </div>
           )}
-          {showDetails && <div>details</div>}
+          {showDetails && <RecipeDetails meal={recipeToShow} />}
         </div>
       </div>
     </div>
