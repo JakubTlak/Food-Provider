@@ -2,17 +2,27 @@ import "./MainPage.css";
 import { useEffect, useState, useRef } from "react";
 import RecipeDetails from "./RecipeDetails";
 
-function MainPage({ recipeToShow, setRecipeToShow, setPage }) {
+
+function MainPage({
+  recipeToShow,
+  setRecipeToShow,
+  setPage,
+  logged,
+}) {
   const [searchInput, setSearchInput] = useState("");
   const [recipe, setRecipe] = useState([]);
   const [filteredMeals, setFilteredMeals] = useState([]);
   const [showOptions, setShowOptions] = useState(false);
   const [showDetails, setShowDetails] = useState(false);
+
   const dropdownRef = useRef(null);
 
   useEffect(() => {
     fetchRecipes();
-  }, []);
+    if (logged) {
+      setPage("menu");
+    }
+  }, [logged]);
 
   useEffect(() => {
     filterMeals(recipe, searchInput);
@@ -63,7 +73,11 @@ function MainPage({ recipeToShow, setRecipeToShow, setPage }) {
   }
 
   function handleLogin() {
-    setPage("menu");
+    setPage("login");
+  }
+
+  function handleRegister() {
+    setPage("register");
   }
 
   useEffect(() => {
@@ -78,7 +92,7 @@ function MainPage({ recipeToShow, setRecipeToShow, setPage }) {
     <div className="MainPage">
       <div className="loginRegister">
         <button onClick={handleLogin}>login</button>
-        <button>register</button>
+        <button onClick={handleRegister}>register</button>
       </div>
       <div className="searchMeals">
         <div className="customDropdown" ref={dropdownRef}>

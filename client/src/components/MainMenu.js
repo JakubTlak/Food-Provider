@@ -1,6 +1,7 @@
 import "./MainMenu.css";
+import Ingredients from "./Ingredients";
 
-function MainMenu({ setPage, setSearch, ingredients }) {
+function MainMenu({ setPage, setSearch, ingredients, userName }) {
   function handleOnly() {
     setPage("recipeSearch");
     setSearch(true);
@@ -11,9 +12,7 @@ function MainMenu({ setPage, setSearch, ingredients }) {
   }
   return (
     <div className="MainMenu">
-      {ingredients.map((ingr, index) => (
-        <div key={index}>{ingr}</div>
-      ))}
+      <Ingredients ingredients={ingredients} userName={userName} />
       <button onClick={handleOnly}>
         Search for meals only using your ingredients
       </button>

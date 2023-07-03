@@ -1,12 +1,11 @@
-import React, { useState, useEffect } from 'react'
-import './App.css';
-import Ingredients from './components/Ingredients'
-import Registration from './components/Registration';
-import Login from './components/Login';
+import React, { useState, useEffect } from "react";
+import "./App.css";
 import MainPage from "./components/MainPage";
 import RecipeDetails from "./components/RecipeDetails";
 import RecipeSearch from "./components/RecipeSearch";
 import MainMenu from "./components/MainMenu";
+import Registration from "./components/Registration";
+import Login from "./components/Login";
 
 function App() {
   const [page, setPage] = useState("main");
@@ -14,61 +13,27 @@ function App() {
   const [recipeToShow, setRecipeToShow] = useState("");
   const [onlyMyIngredients, setOnlyMyIngredients] = useState(true);
 
-  const [ingredients, setIngredients] = useState(null)
+  const [ingredients, setIngredients] = useState(null);
 
-  const [registered, setRegistered] = useState(null)
-  const[loged, setLoged]= useState(null);
+  const [logged, setLoged] = useState(null);
 
-  const [userName, setUserName] = useState('')
-  const[password, setPassword] = useState('')
-
-
-
+  const [userName, setUserName] = useState("");
+  const [password, setPassword] = useState("");
 
   function getIngredients() {
-    fetch('http://127.0.0.1:9000/api/ingredients')
-      .then(res => res.json())
-      .then(data => {
+    fetch("http://127.0.0.1:9000/api/ingredients")
+      .then((res) => res.json())
+      .then((data) => {
         console.log(data);
         setIngredients(data);
       })
-      .catch(error => console.error(error))
+      .catch((error) => console.error(error));
   }
 
-  useEffect(()=>{
-    getIngredients()
-  }, [])
+  useEffect(() => {
+    getIngredients();
+  }, []);
 
-
-  
-
-
-
-  // return (<>
-  //   {registered || loged ? (
-  //     <div className="App">
-  //       <Ingredients 
-  //       ingredients={ingredients} 
-  //       userName={userName}
-  //       />
-  //     </div>)
-  //     : (
-  //       <div className='App'>
-  //         <Login 
-  //         setLoged={setLoged}
-  //         userName={userName}
-  //         setUserName={setUserName}
-  //         setPassword={setPassword}
-  //         password={password}/>
-  //         <Registration 
-  //         setRegistered={setRegistered}
-  //         userName={userName}
-  //         setUserName={setUserName}
-  //         password={password}
-  //         setPassword={setPassword}/>
-  //       </div>
-  //       )}
-  // </>
   function switchPage(toShow) {
     switch (toShow) {
       case "main":
@@ -77,24 +42,16 @@ function App() {
             setRecipeToShow={setRecipeToShow}
             recipeToShow={recipeToShow}
             setPage={setPage}
+            logged={logged}
           ></MainPage>
         );
-
       case "menu":
         return (
           <MainMenu
             setPage={setPage}
             setSearch={setOnlyMyIngredients}
-            ingredients={[
-              "Beef",
-              "Broccoli",
-              "Potatoes",
-              "Carrots",
-              "plain flour",
-              "Eggs",
-              "milk",
-              "sunflower oil",
-            ]}
+            ingredients={ingredients}
+            userName={userName}
           ></MainMenu>
         );
       case "recipeSearch":
@@ -116,23 +73,34 @@ function App() {
         );
       case "recipeDetails":
         return <RecipeDetails />;
+      case "login":
+        return (
+          <Login
+            setLoged={setLoged}
+            userName={userName}
+            setUserName={setUserName}
+            setPassword={setPassword}
+            password={password}
+            setPage={setPage}
+            logged={logged}
+          />
+        );
+      case "register":
+        return (
+          <Registration
+            userName={userName}
+            setUserName={setUserName}
+            password={password}
+            setPassword={setPassword}
+            setPage={setPage}
+          />
+        );
       default:
         break;
     }
   }
 
-  return (
-    <div className="App">
-      {/* <button type="button" onClick={() => getIngredients()}>
-        Show ingredients
-      </button>
-      {ingredients &&
-        ingredients.map((ingredient, index) => (
-          <Ingredients ingredient={ingredient} myIngredients={myIngredients} />
-        ))} */}
-      {switchPage(page)}
-    </div>
-  );
+  return <div className="App">{switchPage(page)}</div>;
 }
 
 export default App;
