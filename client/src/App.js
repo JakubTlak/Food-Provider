@@ -15,7 +15,7 @@ function App() {
 
   const [ingredients, setIngredients] = useState(null);
 
-  const [logged, setLoged] = useState(null);
+  const [logged, setLoged] = useState(false);
 
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
