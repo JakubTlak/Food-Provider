@@ -1,13 +1,13 @@
 import React, { useState } from "react";
+import "./Login.css";
 
 function Login({
-  setLoged,
+  setLoged: setLogged,
   setPassword,
   setUserName,
   userName,
   password,
   setPage,
-  logged,
 }) {
   const [showAlert, setShowAlert] = useState(false);
 
@@ -15,7 +15,7 @@ function Login({
     fetch(`http://127.0.0.1:9000/login/${userName}/${password}`)
       .then((res) => {
         if (res.status === 200) {
-          setLoged(true);
+          setLogged(true);
           setPage("menu");
         } else {
           setShowAlert(true);
@@ -25,7 +25,7 @@ function Login({
   }
 
   return (
-    <div className="Login">
+    <div className="LoginContainer">
       <h3>Login:</h3>
       <input
         type="text"
@@ -41,7 +41,7 @@ function Login({
         required
       />
       {showAlert ? (
-        <div style={{ color: "red" }}>Wrong username or password!</div>
+        <div className="Alert">Wrong username or password!</div>
       ) : null}
       <button type="button" onClick={() => checkLogin()}>
         Login

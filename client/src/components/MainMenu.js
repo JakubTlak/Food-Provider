@@ -1,7 +1,7 @@
 import "./MainMenu.css";
 import Ingredients from "./Ingredients";
 
-function MainMenu({ setPage, setSearch, ingredients, userName }) {
+function MainMenu({ setPage, setSearch, ingredients, userName, setLoged: setLogged }) {
   function handleOnly() {
     setPage("recipeSearch");
     setSearch(true);
@@ -9,6 +9,11 @@ function MainMenu({ setPage, setSearch, ingredients, userName }) {
   function handleNotOnly() {
     setPage("recipeSearch");
     setSearch(false);
+  }
+
+  function handleLogOut() {
+    setLogged(false);
+    setPage("main");
   }
   return (
     <div className="MainMenu">
@@ -19,7 +24,7 @@ function MainMenu({ setPage, setSearch, ingredients, userName }) {
       <button onClick={handleNotOnly}>
         Search for meals with your ingredients
       </button>
-      <button onClick={() => setPage("main")}>Log Out</button>
+      <button onClick={() => handleLogOut()}>Log Out</button>
     </div>
   );
 }

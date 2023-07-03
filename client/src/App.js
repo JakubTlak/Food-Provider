@@ -15,7 +15,7 @@ function App() {
 
   const [ingredients, setIngredients] = useState(null);
 
-  const [logged, setLoged] = useState(false);
+  const [logged, setLogged] = useState(false);
 
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
@@ -24,7 +24,6 @@ function App() {
     fetch("http://127.0.0.1:9000/api/ingredients")
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         setIngredients(data);
       })
       .catch((error) => console.error(error));
@@ -52,6 +51,7 @@ function App() {
             setSearch={setOnlyMyIngredients}
             ingredients={ingredients}
             userName={userName}
+            setLoged={setLogged}
           ></MainMenu>
         );
       case "recipeSearch":
@@ -76,13 +76,12 @@ function App() {
       case "login":
         return (
           <Login
-            setLoged={setLoged}
+            setLoged={setLogged}
             userName={userName}
             setUserName={setUserName}
             setPassword={setPassword}
             password={password}
             setPage={setPage}
-            logged={logged}
           />
         );
       case "register":
