@@ -12,6 +12,7 @@
   margin-top: 10px;
   margin-right: 20px;
   align-self: flex-end;
+  width: 100vw;
 }
 
 .loginRegister button {
