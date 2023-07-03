@@ -1,0 +1,80 @@
+.MainPage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+  position: relative;
+}
+
+.loginRegister {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 10px;
+  margin-right: 20px;
+  align-self: flex-end;
+}
+
+.loginRegister button {
+  background-color: green;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  margin-left: 10px;
+  cursor: pointer;
+}
+
+.searchMeals {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+  position: relative;
+}
+
+.customDropdown {
+  position: relative;
+}
+
+.customDropdown input {
+  padding: 10px;
+  width: 300px;
+  position: relative;
+}
+
+.customDropdown .clearButton {
+  position: absolute;
+  top: 1.5em;
+  right: 5px;
+  transform: translateY(-50%);
+  background-color: transparent;
+  border: none;
+  color: #ad2d2d;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.dropdownOptions {
+  position: absolute;
+  top: calc(100% + 10px);
+  left: 0;
+  z-index: 1;
+  width: 100%;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-top: none;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.dropdownOptions .option {
+  padding: 10px;
+  cursor: pointer;
+}
+
+.dropdownOptions .option:hover {
+  background-color: #f2f2f2;
+}
+
+.customDropdown > div {
+  margin-top: 10px;
+}

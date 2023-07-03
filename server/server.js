@@ -23,10 +23,46 @@ app.use(function (req, res, next) {
   next();
 });
 
-mongoose.connect(
-  `${mongoPasswordo}`
-);
+mongoose.connect(`${mongoPasswordo}`);
 
+app.get("/api/ingredients", (req, res) => {
+  Ingredient.find({})
+    .then((data) => res.json(data))
+    .catch((error) => console.error(error));
+});
+
+app.get("/api/meals", (req, res) => {
+  Recipe.find({})
+    .then((data) => res.send(data))
+    .catch((error) => console.error(error));
+});
+
+app.patch("/api/possibleMeals", (req, res) => {
+  Recipe.find({ "ingredients.Ingredient": { $in: req.body } })
+    .then((data) => res.send(data))
+    .catch((error) => console.error(error));
+});
+
+app.patch("/api/cookableMeals", (req, res) => {
+  const requestedIngredients = req.body;
+
+  Recipe.find({
+    "ingredients.Ingredient": { $in: requestedIngredients },
+  })
+    .then((data) => {
+      const filteredRecipe = data.filter((recipe) => {
+        const recipeIngredients = recipe.ingredients.map(
+          (ingredient) => ingredient.Ingredient
+        );
+        return requestedIngredients.every((ingredient) =>
+          recipeIngredients.includes(ingredient)
+        );
+      });
+
+      res.send(filteredRecipe);
+    })
+    .catch((error) => console.error(error));
+});
 
 app.listen(port, ip, () => console.log(`http://${ip}:${port}`));
 
