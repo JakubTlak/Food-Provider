@@ -54,7 +54,7 @@ function App() {
             myIngredients={myIngredients}
             setMyIngredients={setMyIngredients}
             userName={userName}
-            setLoged={setLogged}
+            setLogged={setLogged}
           ></MainMenu>
         );
       case "recipeSearch":
@@ -70,7 +70,7 @@ function App() {
       case "login":
         return (
           <Login
-            setLoged={setLogged}
+            setLogged={setLogged}
             userName={userName}
             setUserName={setUserName}
             setPassword={setPassword}

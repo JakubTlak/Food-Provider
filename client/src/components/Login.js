@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./Login.css";
 
 function Login({
-  setLoged: setLogged,
+  setLogged,
   setPassword,
   setUserName,
   userName,
