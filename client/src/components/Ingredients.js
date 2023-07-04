@@ -1,13 +1,16 @@
 import React, { useState, useEffect } from "react";
 import "./Ingredients.css";
 
-function Ingredients({ ingredients, userName, setMyIngredients, myIngredients }) {
+function Ingredients({
+  ingredients,
+  userName,
+  setMyIngredients,
+  myIngredients,
+}) {
   const [searchValue, setSearchValue] = useState("");
-  const [showOptions, setShowOptions] = useState(false);
   const [filteredIngredients, setFilteredIngredients] = useState(ingredients);
 
   function addIngredient(ingredient) {
-    setShowOptions(false);
     const data = { ingredient };
     if (!myIngredients.includes(ingredient)) {
       fetch(`http://127.0.0.1:9000/add/ingredients/${userName}`, {
@@ -53,7 +56,6 @@ function Ingredients({ ingredients, userName, setMyIngredients, myIngredients })
   }, [ingredients, searchValue]);
 
   function handleChange(e) {
-    setShowOptions(true);
     setSearchValue(e.target.value);
   }
 
@@ -76,27 +78,28 @@ function Ingredients({ ingredients, userName, setMyIngredients, myIngredients })
           onChange={handleChange}
           placeholder="Search..."
         />
-        {showOptions && (
-          <ul>
-            {filteredIngredients.map((i, index) => (
-              <div
-                key={index}
-                className="ingredientItem"
-                onClick={() => addIngredient(i.ingredientName)}
-              >
-                {i.ingredientName}
-              </div>
-            ))}
-          </ul>
-        )}
+        <ul className="IngrList">
+          {filteredIngredients.map((i, index) => (
+            <div
+              key={index}
+              className="ingredientItem"
+              onClick={() => addIngredient(i.ingredientName)}
+            >
+              {i.ingredientName}
+            </div>
+          ))}
+        </ul>
       </div>
 
       {myIngredients ? (
-        <div>
+        <div className="myIngredients">
           {myIngredients.map((i, index) => (
             <div key={index} className="myIngredient">
               {i}
-              <button onClick={() => removeIngredient(i)}> X</button>
+              <button className="Remove" onClick={() => removeIngredient(i)}>
+                {" "}
+                X
+              </button>
             </div>
           ))}
         </div>

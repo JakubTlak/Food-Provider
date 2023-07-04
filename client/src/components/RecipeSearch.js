@@ -2,9 +2,11 @@ import { useEffect, useState } from "react";
 import "./RecipeSearch.css";
 import RecipeDetails from "./RecipeDetails";
 
-function RecipeSearch({ ingredients, bool, setPage }) {
+function RecipeSearch({ ingredients, setPage, setLogged }) {
   const [possibleMeals, setMealsToShow] = useState(null);
   const [selectedMeal, setSelectedMeal] = useState(null);
+  const [showMenu, setShowMenu] = useState(true);
+  const [bool, setBool] = useState(false);
 
   useEffect(() => {
     fetch(
@@ -31,14 +33,38 @@ function RecipeSearch({ ingredients, bool, setPage }) {
   }, [bool]);
 
   function handleOnClick() {
-    setPage("menu");
+    setShowMenu(true);
   }
 
   function handleRecipeClick(index) {
     setSelectedMeal(possibleMeals[index]);
   }
 
-  return bool ? (
+  function handleOnly() {
+    setBool(true);
+    setShowMenu(false);
+  }
+  function handleNotOnly() {
+    setBool(false);
+    setShowMenu(false);
+  }
+
+  function handleLogOut() {
+    setLogged(false);
+    setPage("main");
+  }
+
+  return showMenu ? (
+    <>
+      <button onClick={handleOnly}>
+        Search for meals only using your ingredients
+      </button>
+      <button onClick={handleNotOnly}>
+        Search for meals with your ingredients
+      </button>
+      <button onClick={() => handleLogOut()}>Log Out</button>
+    </>
+  ) : bool ? (
     <div className="RecipeSearch">
       <h1>Meals you can cook with only what you have</h1>
       <button onClick={handleOnClick}>Back</button>

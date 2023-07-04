@@ -1,0 +1,30 @@
+.MainMenu {
+  width: 100vw;
+  height: 100vh;
+  display: grid;
+  grid-auto-columns: 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
+  gap: 0px 0px;
+  grid-template-areas:
+    "ingredient myIngredients myIngredients myIngredients myIngredients myIngredients"
+    "ingredient menu menu menu menu menu"
+    "ingredient menu menu menu menu menu"
+    "ingredient menu menu menu menu menu"
+    "ingredient menu menu menu menu menu"
+    "ingredient menu menu menu menu menu";
+}
+.ingredient {
+  grid-area: ingredient;
+}
+.myIngredients {
+  grid-area: myIngredients;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  overflow-y: scroll;
+}
+
+.menu {
+  grid-area: menu;
+}

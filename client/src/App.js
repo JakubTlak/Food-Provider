@@ -2,22 +2,16 @@ import React, { useState, useEffect } from "react";
 import "./App.css";
 import MainPage from "./components/MainPage";
 import RecipeDetails from "./components/RecipeDetails";
-import RecipeSearch from "./components/RecipeSearch";
 import MainMenu from "./components/MainMenu";
 import Registration from "./components/Registration";
 import Login from "./components/Login";
 
 function App() {
   const [page, setPage] = useState("main");
-
   const [recipeToShow, setRecipeToShow] = useState("");
-  const [onlyMyIngredients, setOnlyMyIngredients] = useState(true);
   const [myIngredients, setMyIngredients] = useState([]);
-
   const [ingredients, setIngredients] = useState(null);
-
   const [logged, setLogged] = useState(false);
-
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
 
@@ -49,21 +43,12 @@ function App() {
         return (
           <MainMenu
             setPage={setPage}
-            setSearch={setOnlyMyIngredients}
             ingredients={ingredients}
             myIngredients={myIngredients}
             setMyIngredients={setMyIngredients}
             userName={userName}
             setLogged={setLogged}
           ></MainMenu>
-        );
-      case "recipeSearch":
-        return (
-          <RecipeSearch
-            ingredients={myIngredients}
-            bool={onlyMyIngredients}
-            setPage={setPage}
-          ></RecipeSearch>
         );
       case "recipeDetails":
         return <RecipeDetails />;
