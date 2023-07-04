@@ -6,11 +6,14 @@ function RecipeSearch({ ingredients, setPage, setLogged }) {
   const [possibleMeals, setMealsToShow] = useState(null);
   const [selectedMeal, setSelectedMeal] = useState(null);
   const [showMenu, setShowMenu] = useState(true);
-  const [bool, setBool] = useState(false);
+  const [onlyMyIng, setOnlyMyIng] = useState(false);
+  const [showDetails, setShowDetails] = useState(false);
 
   useEffect(() => {
     fetch(
-      `http://127.0.0.1:9000/api/${bool ? "cookableMeals" : "possibleMeals"}`,
+      `http://127.0.0.1:9000/api/${
+        onlyMyIng ? "cookableMeals" : "possibleMeals"
+      }`,
       {
         method: "PATCH",
         body: JSON.stringify(ingredients),
@@ -30,22 +33,28 @@ function RecipeSearch({ ingredients, setPage, setLogged }) {
       .catch((error) => {
         console.error(error);
       });
-  }, [bool]);
+  }, [onlyMyIng, showDetails, possibleMeals]);
 
   function handleOnClick() {
+    setShowDetails(false);
     setShowMenu(true);
   }
 
   function handleRecipeClick(index) {
     setSelectedMeal(possibleMeals[index]);
+    setShowDetails(true);
   }
 
   function handleOnly() {
-    setBool(true);
+    setSelectedMeal(null);
+    setShowDetails(false);
+    setOnlyMyIng(true);
     setShowMenu(false);
   }
   function handleNotOnly() {
-    setBool(false);
+    setSelectedMeal(null);
+    setShowDetails(false);
+    setOnlyMyIng(false);
     setShowMenu(false);
   }
 
@@ -64,7 +73,7 @@ function RecipeSearch({ ingredients, setPage, setLogged }) {
       </button>
       <button onClick={() => handleLogOut()}>Log Out</button>
     </>
-  ) : bool ? (
+  ) : onlyMyIng ? (
     <div className="RecipeSearch">
       <h1>Meals you can cook with only what you have</h1>
       <button onClick={handleOnClick}>Back</button>
@@ -81,7 +90,7 @@ function RecipeSearch({ ingredients, setPage, setLogged }) {
       )}
       {selectedMeal && <RecipeDetails meal={selectedMeal} />}
     </div>
-  ) : (
+  ) : !showDetails ? (
     <div className="RecipeSearch">
       <h1>Meals you can cook using what you have</h1>
       <button onClick={handleOnClick}>Back</button>
@@ -94,7 +103,15 @@ function RecipeSearch({ ingredients, setPage, setLogged }) {
           ))}
         </div>
       )}
-      {selectedMeal && <RecipeDetails meal={selectedMeal} />}
+    </div>
+  ) : (
+    <div>
+      {selectedMeal && (
+        <>
+          <button onClick={() => setShowDetails(false)}>Back</button>
+          <RecipeDetails meal={selectedMeal} />
+        </>
+      )}
     </div>
   );
 }
