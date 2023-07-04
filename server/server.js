@@ -46,11 +46,9 @@ app.patch("/api/possibleMeals", (req, res) => {
 app.patch("/api/cookableMeals", (req, res) => {
   const requestedIngredients = req.body;
 
-  Recipe.find({
-    "ingredients.Ingredient": { $in: requestedIngredients },
-  })
+  Recipe.find({})
     .then((data) => {
-      const filteredRecipe = data.filter((recipe) => {
+      const filteredRecipes = data.filter((recipe) => {
         const recipeIngredients = recipe.ingredients.map(
           (ingredient) => ingredient.Ingredient
         );
@@ -59,9 +57,28 @@ app.patch("/api/cookableMeals", (req, res) => {
         );
       });
 
-      res.send(filteredRecipe);
+      const mealsWithFewerIngredients = filteredRecipes.filter((recipe) => {
+        const recipeIngredients = recipe.ingredients.map(
+          (ingredient) => ingredient.Ingredient
+        );
+        return (
+          recipeIngredients.length <= requestedIngredients.length &&
+          recipeIngredients.every((ingredient) =>
+            requestedIngredients.includes(ingredient)
+          )
+        );
+      });
+
+      if (mealsWithFewerIngredients.length > 0) {
+        res.send(mealsWithFewerIngredients);
+      } else {
+        res.json("No matching cookable meals found");
+      }
     })
-    .catch((error) => console.error(error));
+    .catch((error) => {
+      console.error(error);
+      res.status(500).json({ error: "Failed to fetch cookable meals" });
+    });
 });
 
 app.listen(port, ip, () => console.log(`http://${ip}:${port}`));
@@ -190,24 +207,12 @@ app.patch("/add/ingredients/:userName", async (req, res) => {
 
 app.patch("/remove/ingredients/:userName", async (req, res) => {
   const userName = req.params.userName;
-
   const ingredient = req.body.ingredient;
-
   try {
-    const user = await User.findOne({ userName: userName });
-    if (!user) {
-      res.json({ message: "ty jelopie" });
-    }
-
-    const indexToRemove = user.ingredients.findIndex(
-      (item) => item === ingredient
-    );
-
-    if (indexToRemove !== -1) {
-      user.ingredients.splice(indexToRemove, 1);
-    }
-
-    await user.save();
+    await User.findOneAndUpdate(
+      { userName: userName },
+      { $pull: { ingredients: ingredient } }
+    ).exec();
     res.json({ message: "user ingredients updated" });
   } catch (error) {
     res.json({ error: "user ingredients cannot be updated" });

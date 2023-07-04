@@ -12,6 +12,7 @@ function App() {
 
   const [recipeToShow, setRecipeToShow] = useState("");
   const [onlyMyIngredients, setOnlyMyIngredients] = useState(true);
+  const [myIngredients, setMyIngredients] = useState([]);
 
   const [ingredients, setIngredients] = useState(null);
 
@@ -50,6 +51,8 @@ function App() {
             setPage={setPage}
             setSearch={setOnlyMyIngredients}
             ingredients={ingredients}
+            myIngredients={myIngredients}
+            setMyIngredients={setMyIngredients}
             userName={userName}
             setLoged={setLogged}
           ></MainMenu>
@@ -57,16 +60,7 @@ function App() {
       case "recipeSearch":
         return (
           <RecipeSearch
-            ingredients={[
-              "Beef",
-              "Broccoli",
-              "Potatoes",
-              "Carrots",
-              "plain flour",
-              "Eggs",
-              "milk",
-              "sunflower oil",
-            ]}
+            ingredients={myIngredients}
             bool={onlyMyIngredients}
             setPage={setPage}
           ></RecipeSearch>

@@ -1,0 +1,22 @@
+.Recipe-container {
+  display: grid;
+  grid-auto-columns: 1fr;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 0px 0px;
+  grid-template-areas:
+    "top-container top-container"
+    "Ingredient-container Instructions";
+}
+.top-container {
+  grid-area: top-container;
+  display: flex;
+}
+.Ingredient-container {
+  grid-area: Ingredient-container;
+  display: flex;
+}
+.info {
+  grid-area: Instructions;
+  display: flex;
+}
