@@ -58,10 +58,7 @@ function RecipeSearch({ ingredients, setPage, setLogged }) {
     setShowMenu(false);
   }
 
-  function handleLogOut() {
-    setLogged(false);
-    setPage("main");
-  }
+  
 
   return showMenu ? (
     <>
@@ -71,7 +68,7 @@ function RecipeSearch({ ingredients, setPage, setLogged }) {
       <button onClick={handleNotOnly}>
         Search for meals with your ingredients
       </button>
-      <button onClick={() => handleLogOut()}>Log Out</button>
+      
     </>
   ) : onlyMyIng ? (
     <div className="RecipeSearch">

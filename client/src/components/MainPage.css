@@ -2,7 +2,7 @@
   display: grid;
   grid-auto-columns: 1fr;
   grid-template-columns: 1fr 1fr 1fr 1fr 1.6fr 0.4fr;
-  grid-template-rows: 0.5fr 0.5fr 2fr 1fr 1fr;
+  grid-template-rows: 0.5fr 0.7fr 1.8fr 1fr 1fr;
   gap: 0px 0px;
   grid-template-areas:
     "main-Title main-Title main-Title main-Title main-Title loginRegister"
