@@ -45,7 +45,6 @@ function MainPage({ recipeToShow, setRecipeToShow, setPage, logged }) {
     const input = e.target.value;
     setSearchInput(input);
     setShowOptions(true);
-    // setShowDetails(false);
   };
 
   const handleOptionClick = (value, meal) => {
@@ -97,6 +96,13 @@ function MainPage({ recipeToShow, setRecipeToShow, setPage, logged }) {
             onChange={handleChange}
             value={searchInput}
           />
+          <button
+            hidden={searchInput ? false : true}
+            className="clearButton"
+            onClick={handleClear}
+          >
+            X
+          </button>
 
           {showOptions && (
             <div className="dropdownOptions">
