@@ -2,13 +2,7 @@ import "./MainPage.css";
 import { useEffect, useState, useRef } from "react";
 import RecipeDetails from "./RecipeDetails";
 
-
-function MainPage({
-  recipeToShow,
-  setRecipeToShow,
-  setPage,
-  logged,
-}) {
+function MainPage({ recipeToShow, setRecipeToShow, setPage, logged }) {
   const [searchInput, setSearchInput] = useState("");
   const [recipe, setRecipe] = useState([]);
   const [filteredMeals, setFilteredMeals] = useState([]);
@@ -51,7 +45,7 @@ function MainPage({
     const input = e.target.value;
     setSearchInput(input);
     setShowOptions(true);
-    setShowDetails(false);
+    // setShowDetails(false);
   };
 
   const handleOptionClick = (value, meal) => {
@@ -90,6 +84,7 @@ function MainPage({
 
   return (
     <div className="MainPage">
+      <h1 className="main-Title">Lodówa</h1>
       <div className="loginRegister">
         <button onClick={handleLogin}>login</button>
         <button onClick={handleRegister}>register</button>
@@ -102,11 +97,7 @@ function MainPage({
             onChange={handleChange}
             value={searchInput}
           />
-          {searchInput && (
-            <button className="clearButton" onClick={handleClear}>
-              X
-            </button>
-          )}
+
           {showOptions && (
             <div className="dropdownOptions">
               {filteredMeals.map((meal) => (
@@ -121,9 +112,11 @@ function MainPage({
               ))}
             </div>
           )}
-          {showDetails && <RecipeDetails meal={recipeToShow} />}
         </div>
       </div>
+      {showDetails && (
+        <RecipeDetails className="mealDescription" meal={recipeToShow} />
+      )}
     </div>
   );
 }
