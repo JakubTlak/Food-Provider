@@ -39,3 +39,25 @@ h1 {
   align-content: center;
   justify-content: center;
 }
+
+.notStorage{
+  position: relative;
+  width: 200px;
+  height: 70px;
+}
+.ingredient-list{
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%,-50%);
+  
+}
+
+.notAvailable{
+  position: absolute;
+  width: 130px;
+  height: 50px;
+  z-index: -1;
+  left: 35px;
+  top:10px; 
+}

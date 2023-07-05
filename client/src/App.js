@@ -37,6 +37,7 @@ function App() {
             recipeToShow={recipeToShow}
             setPage={setPage}
             logged={logged}
+            myIngredients={myIngredients}
           ></MainPage>
         );
       case "menu":

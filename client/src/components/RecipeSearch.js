@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import "./RecipeSearch.css";
 import RecipeDetails from "./RecipeDetails";
 
-function RecipeSearch({ ingredients, setPage, setLogged }) {
+function RecipeSearch({ ingredients, setPage, setLogged, myIngredients }) {
   const [possibleMeals, setMealsToShow] = useState(null);
   const [selectedMeal, setSelectedMeal] = useState(null);
   const [showMenu, setShowMenu] = useState(true);
@@ -88,7 +88,7 @@ function RecipeSearch({ ingredients, setPage, setLogged }) {
       ) : (
         <div>No Meals found! Try adding more ingredients!</div>
       )}
-      {selectedMeal && <RecipeDetails meal={selectedMeal} />}
+      {selectedMeal && <RecipeDetails meal={selectedMeal} myIngredients={myIngredients}/>}
     </div>
   ) : !showDetails ? (
     <div className="RecipeSearch">
@@ -109,7 +109,7 @@ function RecipeSearch({ ingredients, setPage, setLogged }) {
       {selectedMeal && (
         <>
           <button onClick={() => setShowDetails(false)}>Back</button>
-          <RecipeDetails meal={selectedMeal} />
+          <RecipeDetails meal={selectedMeal} myIngredients={myIngredients}/>
         </>
       )}
     </div>

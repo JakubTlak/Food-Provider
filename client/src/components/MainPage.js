@@ -8,6 +8,7 @@ function MainPage({
   setRecipeToShow,
   setPage,
   logged,
+  myIngredients
 }) {
   const [searchInput, setSearchInput] = useState("");
   const [recipe, setRecipe] = useState([]);
@@ -121,7 +122,7 @@ function MainPage({
               ))}
             </div>
           )}
-          {showDetails && <RecipeDetails meal={recipeToShow} />}
+          {showDetails && <RecipeDetails meal={recipeToShow} myIngredients={myIngredients}/>}
         </div>
       </div>
     </div>

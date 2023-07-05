@@ -23,6 +23,7 @@ function MainMenu({
           ingredients={myIngredients}
           setPage={setPage}
           setLogged={setLogged}
+          myIngredients={myIngredients}
         ></RecipeSearch>
       </div>
     </div>
