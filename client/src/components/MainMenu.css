@@ -3,7 +3,7 @@
   height: 100vh;
   display: grid;
   grid-auto-columns: 1fr;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1.6fr 0.4fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1.5fr 0.5fr;
   grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
   gap: 0px 0px;
   grid-template-areas:
@@ -12,11 +12,15 @@
     "ingredient menu menu menu menu menu"
     "ingredient menu menu menu menu menu"
     "ingredient menu menu menu menu menu"
+    "ingredient menu menu menu menu menu"
     "ingredient menu menu menu menu menu";
+
+  background-color: rgb(185, 235, 218);
 }
 .ingredient {
   grid-area: ingredient;
 }
+
 .myIngredients {
   grid-area: myIngredients;
   display: flex;
@@ -27,6 +31,12 @@
 
 .menu {
   grid-area: menu;
+  background-color: rgb(185, 235, 218);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  height: auto;
 }
 
 .Logout {
@@ -34,4 +44,5 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+  background-color: rgb(10, 67, 48);
 }

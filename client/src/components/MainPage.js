@@ -83,7 +83,9 @@ function MainPage({ recipeToShow, setRecipeToShow, setPage, logged }) {
 
   return (
     <div className="MainPage">
-      <h1 className="main-Title">Lodówa</h1>
+      <div className="main-Title">
+        <h1>Lodówa</h1>
+      </div>
       <div className="loginRegister">
         <button onClick={handleLogin}>login</button>
         <button onClick={handleRegister}>register</button>
