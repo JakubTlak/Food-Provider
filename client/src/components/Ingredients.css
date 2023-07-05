@@ -20,6 +20,7 @@
   margin: 0;
   height: 100%;
   overflow-y: scroll;
+  background-color: aliceblue;
 }
 
 .ingredient ul div {
@@ -43,6 +44,10 @@
   justify-content: flex-end;
   flex-wrap: wrap;
   align-items: center;
+}
+
+.myIngredients {
+  background-color: aliceblue;
 }
 button {
   margin: 10px;

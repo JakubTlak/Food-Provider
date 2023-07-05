@@ -1,43 +1,63 @@
 .Recipe-container {
+  border: black;
+  border-style: groove;
+  border-radius: 5%;
+  width: 80vw;
   display: grid;
   grid-auto-columns: 1fr;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr 1fr;
+  grid-template-columns: 1fr 1.4fr 0.6fr;
+  grid-template-rows: 1fr 1 fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
   gap: 0px 0px;
   grid-template-areas:
-    "top-container top-container"
-    "Ingredient-container Instructions";
+    "Title Title Title"
+    "Ingredient-container Recipe-picture Recipe-picture"
+    "Ingredient-container Recipe-picture Recipe-picture"
+    "Ingredient-container Recipe-picture Recipe-picture"
+    "Ingredient-container Recipe-picture Recipe-picture"
+    "Ingredient-container Recipe-picture Recipe-picture"
+    "Ingredient-container Recipe-picture Recipe-picture"
+    "Instructions Instructions Instructions"
+    "Instructions Instructions Instructions";
 }
-.top-container {
-  grid-area: top-container;
+
+.Title {
+  grid-area: Title;
   display: flex;
-  flex-direction: column;
-  align-content: center;
-  flex-wrap: wrap;
   justify-content: center;
+  align-items: center;
+  height: 40px;
+}
+.Recipe-picture {
+  grid-area: Recipe-picture;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
 }
 .Ingredient-container {
   grid-area: Ingredient-container;
   display: flex;
   flex-direction: column;
-  align-content: center;
-  flex-wrap: wrap;
   align-items: center;
   justify-content: center;
 }
 .Instructions {
   grid-area: Instructions;
   display: flex;
+  margin: 30px;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
 }
 
+.top-container {
+  display: flex;
+}
 img {
   max-width: 50vw;
   max-height: 50vw;
-}
-h1 {
-  display: flex;
-  align-content: center;
-  justify-content: center;
+  border-color: black;
+  border-style: groove;
 }
 
 .notStorage{

@@ -1,18 +1,47 @@
 .MainPage {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-auto-columns: 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1.5fr 0.5fr;
+  grid-template-rows: 0.5fr 0.7fr 1.8fr 1fr 1fr;
+  gap: 0px 0px;
+  grid-template-areas:
+    "main-Title main-Title main-Title main-Title main-Title loginRegister"
+    "searchMeals searchMeals searchMeals searchMeals searchMeals searchMeals"
+    "mealDescription mealDescription mealDescription mealDescription mealDescription mealDescription"
+    "mealDescription mealDescription mealDescription mealDescription mealDescription mealDescription"
+    "mealDescription mealDescription mealDescription mealDescription mealDescription mealDescription";
+  justify-items: center;
   align-items: center;
-  margin-top: 20px;
   position: relative;
+  width: 100vw;
+  background-color: rgb(185, 235, 218);
+}
+
+.main-Title {
+  grid-area: main-Title;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  justify-content: flex-start;
+  font-size: 2em;
+  background-color: #d6ecec;
+  position: relative;
+}
+h1 {
+  position: relative;
+  left: 50px;
 }
 
 .loginRegister {
+  grid-area: loginRegister;
   display: flex;
-  justify-content: flex-end;
-  margin-top: 10px;
-  margin-right: 20px;
-  align-self: flex-end;
-  width: 100vw;
+  flex-direction: column;
+  align-items: center;
+  justify-items: center;
+  background-color: rgb(10, 67, 48);
+  height: 100%;
+  width: 100%;
+  justify-content: center;
 }
 
 .loginRegister button {
@@ -25,10 +54,10 @@
 }
 
 .searchMeals {
+  grid-area: searchMeals;
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 20px;
   position: relative;
 }
 
@@ -38,14 +67,14 @@
 
 .customDropdown input {
   padding: 10px;
-  width: 300px;
   position: relative;
+  width: 300px;
 }
 
 .customDropdown .clearButton {
   position: absolute;
-  top: 1.5em;
-  right: 5px;
+  top: 10px;
+  right: 1px;
   transform: translateY(-50%);
   background-color: transparent;
   border: none;
@@ -63,7 +92,7 @@
   background-color: #fff;
   border: 1px solid #ccc;
   border-top: none;
-  max-height: 200px;
+  max-height: 500px;
   overflow-y: auto;
 }
 
@@ -78,4 +107,10 @@
 
 .customDropdown > div {
   margin-top: 10px;
+}
+
+.Recipe-container {
+  grid-area: mealDescription;
+  position: relative;
+  background-color: #d6ecec;
 }

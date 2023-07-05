@@ -10,6 +10,11 @@ function MainMenu({
   myIngredients,
   setMyIngredients,
 }) {
+  function handleLogOut() {
+    setLogged(false);
+    setPage("main");
+  }
+
   return (
     <div className="MainMenu">
       <Ingredients
@@ -18,6 +23,7 @@ function MainMenu({
         myIngredients={myIngredients}
         setMyIngredients={setMyIngredients}
       />
+      <div className="Logout"><button onClick={() => handleLogOut()}>Log Out</button></div>
       <div className="menu">
         <RecipeSearch
           ingredients={myIngredients}

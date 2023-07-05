@@ -2,6 +2,7 @@ import "./MainPage.css";
 import { useEffect, useState, useRef } from "react";
 import RecipeDetails from "./RecipeDetails";
 
+<<<<<<< HEAD
 
 function MainPage({
   recipeToShow,
@@ -10,6 +11,9 @@ function MainPage({
   logged,
   myIngredients
 }) {
+=======
+function MainPage({ recipeToShow, setRecipeToShow, setPage, logged }) {
+>>>>>>> c70419e85962323530100cde4f31da396924393e
   const [searchInput, setSearchInput] = useState("");
   const [recipe, setRecipe] = useState([]);
   const [filteredMeals, setFilteredMeals] = useState([]);
@@ -52,7 +56,6 @@ function MainPage({
     const input = e.target.value;
     setSearchInput(input);
     setShowOptions(true);
-    setShowDetails(false);
   };
 
   const handleOptionClick = (value, meal) => {
@@ -91,6 +94,9 @@ function MainPage({
 
   return (
     <div className="MainPage">
+      <div className="main-Title">
+        <h1>Lodówa</h1>
+      </div>
       <div className="loginRegister">
         <button onClick={handleLogin}>login</button>
         <button onClick={handleRegister}>register</button>
@@ -103,11 +109,14 @@ function MainPage({
             onChange={handleChange}
             value={searchInput}
           />
-          {searchInput && (
-            <button className="clearButton" onClick={handleClear}>
-              X
-            </button>
-          )}
+          <button
+            hidden={searchInput ? false : true}
+            className="clearButton"
+            onClick={handleClear}
+          >
+            X
+          </button>
+
           {showOptions && (
             <div className="dropdownOptions">
               {filteredMeals.map((meal) => (
@@ -122,9 +131,15 @@ function MainPage({
               ))}
             </div>
           )}
+<<<<<<< HEAD
           {showDetails && <RecipeDetails meal={recipeToShow} myIngredients={myIngredients}/>}
+=======
+>>>>>>> c70419e85962323530100cde4f31da396924393e
         </div>
       </div>
+      {showDetails && (
+        <RecipeDetails className="mealDescription" meal={recipeToShow} />
+      )}
     </div>
   );
 }

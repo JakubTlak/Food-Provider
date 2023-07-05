@@ -9,13 +9,9 @@ function RecipeDetails({ meal, myIngredients }) {
 
   return (
     <div className="Recipe-container">
-      <div className="top-container">
-        <h1>{meal.strMeal}</h1>{" "}
-        <img
-          className="Recipe-picture"
-          src={meal.strMealThumb}
-          alt="should be a meal..."
-        />
+      <h1 className="Title">{meal.strMeal}</h1>{" "}
+      <div className="Recipe-picture">
+        <img src={meal.strMealThumb} alt="should be a meal..." />
       </div>
       <div className="Ingredient-container">
         {meal.ingredients.map((ingredient, index) => {
@@ -40,7 +36,9 @@ function RecipeDetails({ meal, myIngredients }) {
 
         })}
       </div>
-      <p className="Instructions">{meal.strInstructions}</p>
+      <div className="Instructions">
+        <p>{meal.strInstructions}</p>
+      </div>
     </div>
   );
 }

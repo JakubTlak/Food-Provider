@@ -44,33 +44,31 @@ app.patch("/api/possibleMeals", (req, res) => {
 });
 
 app.patch("/api/cookableMeals", (req, res) => {
-  const requestedIngredients = req.body;
+  const ingredients = req.body;
+  const requestedIngredients = ingredients.map((ing) => ing.toLowerCase());
 
   Recipe.find({})
     .then((data) => {
       const filteredRecipes = data.filter((recipe) => {
-        const recipeIngredients = recipe.ingredients.map(
-          (ingredient) => ingredient.Ingredient
+        const recipeIngredients = recipe.ingredients.map((ingredient) =>
+          ingredient.Ingredient.toLowerCase()
         );
         return requestedIngredients.every((ingredient) =>
           recipeIngredients.includes(ingredient)
         );
       });
 
-      const mealsWithFewerIngredients = filteredRecipes.filter((recipe) => {
-        const recipeIngredients = recipe.ingredients.map(
-          (ingredient) => ingredient.Ingredient
+      const mealsWithAllIngredients = filteredRecipes.filter((recipe) => {
+        const recipeIngredients = recipe.ingredients.map((ingredient) =>
+          ingredient.Ingredient.toLowerCase()
         );
-        return (
-          recipeIngredients.length <= requestedIngredients.length &&
-          recipeIngredients.every((ingredient) =>
-            requestedIngredients.includes(ingredient)
-          )
+        return recipeIngredients.every((ingredient) =>
+          requestedIngredients.includes(ingredient)
         );
       });
 
-      if (mealsWithFewerIngredients.length > 0) {
-        res.send(mealsWithFewerIngredients);
+      if (mealsWithAllIngredients.length > 0) {
+        res.send(mealsWithAllIngredients);
       } else {
         res.json("No matching cookable meals found");
       }
