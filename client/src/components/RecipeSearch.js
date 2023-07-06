@@ -1,10 +1,9 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import "./RecipeSearch.css";
 import RecipeDetails from "./RecipeDetails";
 import Loading from "./Loading";
 
-function RecipeSearch({ ingredients, setPage, setLogged, myIngredients }) {
-
+function RecipeSearch({ ingredients, myIngredients }) {
   const [possibleMeals, setMealsToShow] = useState(null);
   const [selectedMeal, setSelectedMeal] = useState(null);
   const [showMenu, setShowMenu] = useState(true);
@@ -125,7 +124,7 @@ function RecipeSearch({ ingredients, setPage, setLogged, myIngredients }) {
       {selectedMeal && (
         <div className="RecipeSearch">
           <button onClick={() => setShowDetails(false)}>Back</button>
-          <RecipeDetails meal={selectedMeal} myIngredients={myIngredients}/>
+          <RecipeDetails meal={selectedMeal} myIngredients={myIngredients} />
         </div>
       )}
     </div>

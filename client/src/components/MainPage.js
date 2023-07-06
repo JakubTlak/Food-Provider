@@ -2,13 +2,12 @@ import "./MainPage.css";
 import { useEffect, useState, useRef } from "react";
 import RecipeDetails from "./RecipeDetails";
 
-
 function MainPage({
   recipeToShow,
   setRecipeToShow,
   setPage,
   logged,
-  myIngredients
+  myIngredients,
 }) {
   const [searchInput, setSearchInput] = useState("");
   const [recipe, setRecipe] = useState([]);

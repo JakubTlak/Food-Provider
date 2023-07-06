@@ -39,7 +39,15 @@ app.get("/api/meals", (req, res) => {
 
 app.patch("/api/possibleMeals", (req, res) => {
   Recipe.find({ "ingredients.Ingredient": { $in: req.body } })
-    .then((data) => res.send(data))
+    .then((data) => {
+      const filteredData = data.filter((recipe) => {
+        const matchingIngredients = recipe.ingredients.filter((ingredient) =>
+          req.body.includes(ingredient.Ingredient)
+        );
+        return matchingIngredients.length >= 2;
+      });
+      res.send(filteredData);
+    })
     .catch((error) => console.error(error));
 });
 
@@ -49,26 +57,14 @@ app.patch("/api/cookableMeals", (req, res) => {
 
   Recipe.find({})
     .then((data) => {
-      const filteredRecipes = data.filter((recipe) => {
-        const recipeIngredients = recipe.ingredients.map((ingredient) =>
-          ingredient.Ingredient.toLowerCase()
-        );
-        return requestedIngredients.every((ingredient) =>
-          recipeIngredients.includes(ingredient)
-        );
-      });
+      const toSend = data.filter((meal) =>
+        meal.ingredients.every((ing) =>
+          requestedIngredients.includes(ing.Ingredient.toLowerCase())
+        )
+      );
 
-      const mealsWithAllIngredients = filteredRecipes.filter((recipe) => {
-        const recipeIngredients = recipe.ingredients.map((ingredient) =>
-          ingredient.Ingredient.toLowerCase()
-        );
-        return recipeIngredients.every((ingredient) =>
-          requestedIngredients.includes(ingredient)
-        );
-      });
-
-      if (mealsWithAllIngredients.length > 0) {
-        res.send(mealsWithAllIngredients);
+      if (toSend.length > 0) {
+        res.send(toSend);
       } else {
         res.json("No matching cookable meals found");
       }
@@ -78,6 +74,7 @@ app.patch("/api/cookableMeals", (req, res) => {
       res.status(500).json({ error: "Failed to fetch cookable meals" });
     });
 });
+
 
 app.listen(port, ip, () => console.log(`http://${ip}:${port}`));
 
