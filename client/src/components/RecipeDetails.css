@@ -40,6 +40,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  height: 100%;
 }
 .Instructions {
   grid-area: Instructions;
@@ -54,30 +55,33 @@
   display: flex;
 }
 img {
-  max-width: 50vw;
-  max-height: 50vw;
+  max-width: 40vw;
   border-color: black;
   border-style: groove;
 }
 
-.notStorage{
-  position: relative;
-  width: 200px;
-  height: 70px;
-}
-.ingredient-list{
-  margin: 0;
-  position: absolute;
-  top: 50%;
-  transform: translate(-50%,-50%);
-  
+.ingredient-list {
+  display: flex;
 }
 
-.notAvailable{
-  position: absolute;
-  width: 130px;
-  height: 50px;
-  z-index: -1;
-  left: 35px;
-  top:10px; 
-}
+/* .notStorage{
+    position: relative;
+    width: 200px;
+    height: 70px;
+  }
+  .ingredient-list{
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    
+  }
+
+  .notAvailable{
+    position: absolute;
+    width: 130px;
+    height: 50px;
+    z-index: -1;
+    left: 35px;
+    top:10px; 
+  } */

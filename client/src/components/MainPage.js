@@ -2,18 +2,13 @@ import "./MainPage.css";
 import { useEffect, useState, useRef } from "react";
 import RecipeDetails from "./RecipeDetails";
 
-<<<<<<< HEAD
-
 function MainPage({
   recipeToShow,
   setRecipeToShow,
   setPage,
   logged,
-  myIngredients
+  myIngredients,
 }) {
-=======
-function MainPage({ recipeToShow, setRecipeToShow, setPage, logged }) {
->>>>>>> c70419e85962323530100cde4f31da396924393e
   const [searchInput, setSearchInput] = useState("");
   const [recipe, setRecipe] = useState([]);
   const [filteredMeals, setFilteredMeals] = useState([]);
@@ -131,10 +126,6 @@ function MainPage({ recipeToShow, setRecipeToShow, setPage, logged }) {
               ))}
             </div>
           )}
-<<<<<<< HEAD
-          {showDetails && <RecipeDetails meal={recipeToShow} myIngredients={myIngredients}/>}
-=======
->>>>>>> c70419e85962323530100cde4f31da396924393e
         </div>
       </div>
       {showDetails && (

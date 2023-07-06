@@ -1,11 +1,9 @@
 import "./RecipeDetails.css";
 
 function RecipeDetails({ meal, myIngredients }) {
-
-
-  const paragraphStyle = {
-    backgroundColor: 'red',
-  }
+  // const paragraphStyle = {
+  //   backgroundColor: 'red',
+  // }
 
   return (
     <div className="Recipe-container">
@@ -15,25 +13,28 @@ function RecipeDetails({ meal, myIngredients }) {
       </div>
       <div className="Ingredient-container">
         {meal.ingredients.map((ingredient, index) => {
-
-          if (!myIngredients.includes(ingredient.Ingredient)) {
-            return (<div className="notStorage">
-              <img className="notAvailable" src='https://t3.ftcdn.net/jpg/01/38/48/40/360_F_138484065_1enzXuW8NlkppNxSv4hVUrYoeF8qgoeY.jpg'></img>
-              <h3
-                key={index}
-                className="ingredient-list"
-              >{`${ingredient.Messure} ${ingredient.Ingredient}`}</h3>
-            </div>
+          if (myIngredients && !myIngredients.includes(ingredient.Ingredient)) {
+            return (
+              <div className="notStorage" key={index}>
+                {/* <img
+                  alt="something something"
+                  className="notAvailable"
+                  src="https://t3.ftcdn.net/jpg/01/38/48/40/360_F_138484065_1enzXuW8NlkppNxSv4hVUrYoeF8qgoeY.jpg"
+                ></img> */}
+                <h3
+                  key={index}
+                  className="ingredient-list"
+                >{`${ingredient.Messure} ${ingredient.Ingredient}`}</h3>
+              </div>
             );
-          }else{
+          } else {
             return (
               <h3
                 key={index}
                 className="ingredient-list"
               >{`${ingredient.Messure} ${ingredient.Ingredient}`}</h3>
-            )
+            );
           }
-
         })}
       </div>
       <div className="Instructions">
