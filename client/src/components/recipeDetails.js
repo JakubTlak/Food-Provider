@@ -17,20 +17,24 @@ function RecipeDetails({ meal, myIngredients }) {
         {meal.ingredients.map((ingredient, index) => {
 
           if (!myIngredients.includes(ingredient.Ingredient)) {
-            return (<div className="notStorage">
-              <img className="notAvailable" src='https://t3.ftcdn.net/jpg/01/38/48/40/360_F_138484065_1enzXuW8NlkppNxSv4hVUrYoeF8qgoeY.jpg'></img>
+            return (
+              <div className="image-container">
               <h3
                 key={index}
                 className="ingredient-list"
               >{`${ingredient.Messure} ${ingredient.Ingredient}`}</h3>
+              <img className="notAvailable" src='https://t3.ftcdn.net/jpg/01/38/48/40/360_F_138484065_1enzXuW8NlkppNxSv4hVUrYoeF8qgoeY.jpg'></img>
             </div>
             );
           }else{
             return (
+              <div className="image-container">
               <h3
                 key={index}
                 className="ingredient-list"
               >{`${ingredient.Messure} ${ingredient.Ingredient}`}</h3>
+              <img className="notAvailable" src='https://w7.pngwing.com/pngs/718/570/png-transparent-check-mark-computer-icons-green-check-mark-2-icon-check-mark-miscellaneous-angle-leaf-thumbnail.png'></img>
+              </div>
             )
           }
 

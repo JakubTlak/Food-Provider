@@ -3,11 +3,8 @@ import "./RecipeSearch.css";
 import RecipeDetails from "./RecipeDetails";
 import Loading from "./Loading";
 
-<<<<<<< HEAD
 function RecipeSearch({ ingredients, setPage, setLogged, myIngredients }) {
-=======
-function RecipeSearch({ ingredients }) {
->>>>>>> c70419e85962323530100cde4f31da396924393e
+
   const [possibleMeals, setMealsToShow] = useState(null);
   const [selectedMeal, setSelectedMeal] = useState(null);
   const [showMenu, setShowMenu] = useState(true);
@@ -101,10 +98,7 @@ function RecipeSearch({ ingredients }) {
           {selectedMeal && <RecipeDetails meal={selectedMeal} />}
         </>
       )}
-<<<<<<< HEAD
       {selectedMeal && <RecipeDetails meal={selectedMeal} myIngredients={myIngredients}/>}
-=======
->>>>>>> c70419e85962323530100cde4f31da396924393e
     </div>
   ) : !showDetails ? (
     <div className="RecipeSearch">
@@ -131,13 +125,8 @@ function RecipeSearch({ ingredients }) {
       {selectedMeal && (
         <div className="RecipeSearch">
           <button onClick={() => setShowDetails(false)}>Back</button>
-<<<<<<< HEAD
           <RecipeDetails meal={selectedMeal} myIngredients={myIngredients}/>
-        </>
-=======
-          <RecipeDetails meal={selectedMeal} />
         </div>
->>>>>>> c70419e85962323530100cde4f31da396924393e
       )}
     </div>
   );

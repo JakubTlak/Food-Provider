@@ -60,24 +60,15 @@ img {
   border-style: groove;
 }
 
-.notStorage{
-  position: relative;
-  width: 200px;
-  height: 70px;
-}
-.ingredient-list{
-  margin: 0;
-  position: absolute;
-  top: 50%;
-  transform: translate(-50%,-50%);
+
+.image-container {
+  display: flex;
+  align-items: center;
   
 }
 
-.notAvailable{
-  position: absolute;
-  width: 130px;
-  height: 50px;
-  z-index: -1;
-  left: 35px;
-  top:10px; 
+.image-container img {
+  width: 60px;
+  height: 35px;
+  margin: 3%;
 }
